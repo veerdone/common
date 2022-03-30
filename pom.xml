@@ -10,12 +10,12 @@
     <version>0.1</version>
     <modules>
         <module>result</module>
+        <module>base</module>
     </modules>
 
     <properties>
         <java.version>1.8</java.version>
         <springboot.version>2.3.4.RELEASE</springboot.version>
-        <lombok.version>1.18.20</lombok.version>
     </properties>
 
     <dependencyManagement>
@@ -28,11 +28,6 @@
                 <scope>import</scope>
             </dependency>
 
-            <dependency>
-                <groupId>org.projectlombok</groupId>
-                <artifactId>lombok</artifactId>
-                <version>${lombok.version}</version>
-            </dependency>
 
         </dependencies>
     </dependencyManagement>
