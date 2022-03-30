@@ -1,10 +1,10 @@
-package com.github.yu.result.advice;
+package com.github.merry74751.result.advice;
 
-import com.github.yu.result.exception.RepeatSubmitException;
-import com.github.yu.result.exception.UnAuthException;
-import com.github.yu.result.exception.UserNotFoundException;
-import com.github.yu.result.exception.UsernameOrPassErrorException;
-import com.github.yu.result.result.BaseResult;
+import com.github.merry74751.result.exception.RepeatSubmitException;
+import com.github.merry74751.result.exception.UnAuthException;
+import com.github.merry74751.result.exception.UserNotFoundException;
+import com.github.merry74751.result.exception.UsernameOrPassErrorException;
+import com.github.merry74751.result.result.BaseResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;

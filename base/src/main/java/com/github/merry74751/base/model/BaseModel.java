@@ -1,4 +1,4 @@
-package com.github.yu.base.model;
+package com.github.merry74751.base.model;
 
 import java.time.LocalDateTime;
 

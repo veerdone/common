@@ -1,4 +1,4 @@
-package com.github.yu.result.exception;
+package com.github.merry74751.result.exception;
 
 /**
  * @author yu

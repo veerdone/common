@@ -1,4 +1,4 @@
-package com.github.yu.result.result;
+package com.github.merry74751.result.result;
 
 /**
  * @author yu

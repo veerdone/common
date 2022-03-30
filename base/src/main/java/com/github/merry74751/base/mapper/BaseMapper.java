@@ -1,4 +1,4 @@
-package com.github.yu.base.mapper;
+package com.github.merry74751.base.mapper;
 
 import java.util.List;
 

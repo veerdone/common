@@ -1,9 +1,9 @@
-package com.github.yu.result.advice;
+package com.github.merry74751.result.advice;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.github.yu.result.result.ListResult;
-import com.github.yu.result.result.ObjectResult;
+import com.github.merry74751.result.result.ListResult;
+import com.github.merry74751.result.result.ObjectResult;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;

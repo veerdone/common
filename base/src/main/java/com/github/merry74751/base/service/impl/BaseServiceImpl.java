@@ -1,7 +1,7 @@
-package com.github.yu.base.service.impl;
+package com.github.merry74751.base.service.impl;
 
-import com.github.yu.base.mapper.BaseMapper;
-import com.github.yu.base.service.BaseService;
+import com.github.merry74751.base.mapper.BaseMapper;
+import com.github.merry74751.base.service.BaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;

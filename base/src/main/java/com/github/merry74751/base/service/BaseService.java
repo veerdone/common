@@ -1,6 +1,6 @@
-package com.github.yu.base.service;
+package com.github.merry74751.base.service;
 
-import com.github.yu.base.mapper.BaseMapper;
+import com.github.merry74751.base.mapper.BaseMapper;
 
 import java.util.List;
 
