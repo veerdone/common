@@ -4,8 +4,8 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <artifactId>common</artifactId>
-        <groupId>com.github.yu</groupId>
-        <version>0.1</version>
+        <groupId>io.github.yu</groupId>
+        <version>0.2.RELEASE</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
