@@ -1,9 +1,9 @@
-package com.github.merry74751.result.advice;
+package com.github.yu.result.advice;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.github.merry74751.result.result.ListResult;
-import com.github.merry74751.result.result.ObjectResult;
+import com.github.pagehelper.PageInfo;
+import com.github.yu.result.result.BaseResult;
+import com.github.yu.result.result.ListResult;
+import com.github.yu.result.result.ObjectResult;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
@@ -31,19 +31,15 @@ public class ResponseAdvice implements ResponseBodyAdvice<Object> {
 
     @Override
     public Object beforeBodyWrite(Object o, MethodParameter methodParameter, MediaType mediaType, Class<? extends HttpMessageConverter<?>> aClass, ServerHttpRequest serverHttpRequest, ServerHttpResponse serverHttpResponse) {
-        if (o != null) {
-            ObjectMapper mapper = new ObjectMapper();
+        if (null != o) {
             if (o instanceof List) {
-                try {
-                    return mapper.writeValueAsString(ListResult.success((List)o));
-                } catch (JsonProcessingException e) {
-                    e.printStackTrace();
-                }
-            }
-            try {
-                return mapper.writeValueAsString(ObjectResult.success(o));
-            } catch (JsonProcessingException e) {
-                e.printStackTrace();
+                PageInfo pageInfo = new PageInfo();
+                long total = pageInfo.getTotal();
+                return ListResult.result((List)o, total);
+            } else if (o instanceof BaseResult) {
+                return o;
+            } else {
+                return ObjectResult.result(o);
             }
         }
         return o;
