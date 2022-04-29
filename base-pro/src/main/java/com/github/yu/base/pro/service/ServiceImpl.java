@@ -86,13 +86,13 @@ public abstract class ServiceImpl<T, Q extends T, M extends Mapper<T>> implement
                     TableField tableField = field.getAnnotation(TableField.class);
                     String column = null == tableField ?
                             fieldName.substring(0, fieldName.length() - 2) : tableField.value();
-                    if (fieldName.endsWith("Gt")) {
+                    if (fieldName.endsWith("GT")) {
                         queryWrapper.gt(column, value);
-                    } else if (fieldName.endsWith("Lt")) {
+                    } else if (fieldName.endsWith("LT")) {
                         queryWrapper.lt(column, value);
-                    } else if (fieldName.endsWith("Ge")) {
+                    } else if (fieldName.endsWith("GE")) {
                         queryWrapper.ge(column, value);
-                    } else if (fieldName.endsWith("Le")) {
+                    } else if (fieldName.endsWith("LE")) {
                         queryWrapper.le(column, value);
                     }
                 }
