@@ -48,6 +48,7 @@
         <mybatis.plus.version>3.5.1</mybatis.plus.version>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
+        <project.build.sourceEncoding>UTF8</project.build.sourceEncoding>
     </properties>
 
     <dependencyManagement>
