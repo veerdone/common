@@ -22,10 +22,4 @@ public interface BaseMapper<T, Q> {
     List<T> listByEntity(T t);
 
     List<T> listByQuery(Q q);
-
-    List<T> page();
-
-    List<T> pageByEntity(T t);
-
-    List<T> pageByQuery(Q query);
 }

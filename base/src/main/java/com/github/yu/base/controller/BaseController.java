@@ -61,6 +61,11 @@ public abstract class BaseController<T, Q, S extends BaseService<T, Q>> {
         return this.service.page();
     }
 
+    @PostMapping("/pageByEntity")
+    public List<T> pageByEntity(@RequestBody T t) {
+        return this.service.pageByEntity(t);
+    }
+
     @PostMapping("/pageByQuery")
     public List<T> pageByQuery(@RequestBody Q q) {
         return this.service.pageByQuery(q);
