@@ -63,16 +63,16 @@ public abstract class BaseServiceImpl<T, Q, M extends BaseMapper<T, Q>>
 
     @Override
     public List<T> page() {
-        return this.m.page();
+        return this.m.list();
     }
 
     @Override
     public List<T> pageByEntity(T t) {
-        return this.m.pageByEntity(t);
+        return this.m.listByEntity(t);
     }
 
     @Override
     public List<T> pageByQuery(Q query) {
-        return this.m.pageByQuery(query);
+        return this.m.listByQuery(query);
     }
 }

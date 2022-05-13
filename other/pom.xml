@@ -5,7 +5,7 @@
     <parent>
         <artifactId>common</artifactId>
         <groupId>io.github.Merry74751</groupId>
-        <version>0.3.RELEASE</version>
+        <version>0.4.RELEASE</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
@@ -15,6 +15,14 @@
         <dependency>
             <groupId>com.github.pagehelper</groupId>
             <artifactId>pagehelper-spring-boot-starter</artifactId>
+            <version>1.4.2</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+            <optional>true</optional>
+            <version>2.6.6</version>
         </dependency>
 
     </dependencies>

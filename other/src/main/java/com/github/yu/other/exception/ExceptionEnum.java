@@ -9,6 +9,7 @@ public enum ExceptionEnum {
     PARAMETER_ERROR(400, "参数错误"),
     USERNAME_EXIST(400, "用户名已存在"),
     FILE_SUFFIX_ERROR(400, "文件格式不合法"),
+    NO_PERMISSION(401, "没有权限"),
     PASSWORD_ERROR_EXCEPTION(400, "密码错误");
 
     ExceptionEnum(int status, String message) {

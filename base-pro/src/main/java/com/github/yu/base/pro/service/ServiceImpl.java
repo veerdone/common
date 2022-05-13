@@ -83,17 +83,26 @@ public abstract class ServiceImpl<T, Q extends T, M extends Mapper<T>> implement
                 value = field.get(query);
                 if (null != value) {
                     String fieldName = field.getName();
+                    String column;
                     TableField tableField = field.getAnnotation(TableField.class);
-                    String column = null == tableField ?
-                            fieldName.substring(0, fieldName.length() - 2) : tableField.value();
                     if (fieldName.endsWith("GT")) {
+                        column = getColumn(tableField, fieldName, 2);
                         queryWrapper.gt(column, value);
                     } else if (fieldName.endsWith("LT")) {
+                       column = getColumn(tableField, fieldName, 2);
                         queryWrapper.lt(column, value);
                     } else if (fieldName.endsWith("GE")) {
+                        column = getColumn(tableField, fieldName, 2);
                         queryWrapper.ge(column, value);
                     } else if (fieldName.endsWith("LE")) {
+                        column = getColumn(tableField, fieldName, 2);
                         queryWrapper.le(column, value);
+                    } else if (fieldName.endsWith("LikeLEFT")) {
+                        column = getColumn(tableField, fieldName, 8);
+                        queryWrapper.likeLeft(column, value);
+                    } else if (fieldName.endsWith("LIKE")) {
+                        column = getColumn(tableField, fieldName, 4);
+                        queryWrapper.like(column, value);
                     }
                 }
             } catch (IllegalAccessException e) {
@@ -102,6 +111,10 @@ public abstract class ServiceImpl<T, Q extends T, M extends Mapper<T>> implement
         }
         Class<?> c2 = c.getSuperclass();
         classToQueryWrapper(queryWrapper, c2, query);
+    }
+
+    private String getColumn(TableField tableField, String filedName, int length) {
+        return tableField == null ? filedName.substring(0, filedName.length() - length) : tableField.value();
     }
 
     protected void classToQueryWrapper(QueryWrapper<T> queryWrapper, Class c, T entity) {
