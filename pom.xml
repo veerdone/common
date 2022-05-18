@@ -6,7 +6,7 @@
 
     <groupId>io.github.Merry74751</groupId>
     <artifactId>common</artifactId>
-    <version>0.4.RELEASE</version>
+    <version>0.5.RELEASE</version>
     <packaging>pom</packaging>
     <name>common</name>
     <description>a common project</description>

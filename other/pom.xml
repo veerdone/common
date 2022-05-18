@@ -5,7 +5,7 @@
     <parent>
         <artifactId>common</artifactId>
         <groupId>io.github.Merry74751</groupId>
-        <version>0.4.RELEASE</version>
+        <version>0.5.RELEASE</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
@@ -33,6 +33,12 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-jwt</artifactId>
+            <version>5.8.0</version>
         </dependency>
 
     </dependencies>
