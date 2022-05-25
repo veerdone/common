@@ -9,7 +9,7 @@ import java.util.List;
 public abstract class BaseServiceImpl<T, Q, M extends BaseMapper<T, Q>>
         implements BaseService<T, Q> {
     @Autowired
-    BaseMapper<T, Q> m;
+    protected M m;
 
     @Override
     public void insert(T t) {

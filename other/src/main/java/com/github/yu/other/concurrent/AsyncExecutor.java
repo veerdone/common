@@ -11,7 +11,7 @@ import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 @Component
-@ConfigurationProperties(prefix = "executor")
+@ConfigurationProperties(prefix = "config.executor")
 public class AsyncExecutor implements BeanPostProcessor {
     private Integer corePoolSize = 50;
     private Integer maximumPoolSize = 100;

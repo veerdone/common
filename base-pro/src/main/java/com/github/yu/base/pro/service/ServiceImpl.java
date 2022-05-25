@@ -15,54 +15,66 @@ public abstract class ServiceImpl<T, Q extends T, M extends Mapper<T>> implement
     @Autowired
     protected M mapper;
 
+    @Override
     public void insert(T t) {
         this.mapper.insert(t);
     }
 
+    @Override
     public void deleteById(Serializable id) {
         this.mapper.deleteById(id);
     }
 
+    @Override
     public void updateById(T t) {
         this.mapper.updateById(t);
     }
 
+    @Override
     public T getById(Serializable id) {
         return this.mapper.selectById(id);
     }
 
+    @Override
     public T getByEntity(T t) {
         QueryWrapper<T> queryWrapper = wrapperByEntity(t);
         return this.mapper.selectOne(queryWrapper);
     }
 
+    @Override
     public T getByQuery(Q q) {
         QueryWrapper<T> queryWrapper = wrapperByQuery(q);
         return this.mapper.selectOne(queryWrapper);
     }
 
+    @Override
     public List<T> list() {
         return this.mapper.selectList(null);
     }
 
+    @Override
     public List<T> listByEntity(T t) {
         QueryWrapper<T> queryWrapper = wrapperByEntity(t);
         return this.mapper.selectList(queryWrapper);
     }
 
+    @Override
     public List<T> listByQuery(Q q) {
         QueryWrapper<T> queryWrapper = wrapperByQuery(q);
         return this.mapper.selectList(queryWrapper);
     }
 
+    @Override
     public List<T> page() {
         return this.list();
     }
 
+    @Override
     public List<T> pageByEntity(T t) {
         return this.listByEntity(t);
     }
 
+    @Override
     public List<T> pageByQuery(Q q) {
         return this.listByQuery(q);
     }
@@ -114,7 +126,10 @@ public abstract class ServiceImpl<T, Q extends T, M extends Mapper<T>> implement
     }
 
     private String getColumn(TableField tableField, String filedName, int length) {
-        return tableField == null ? filedName.substring(0, filedName.length() - length) : tableField.value();
+        if (tableField != null && !"".equals(tableField.value())) {
+            return tableField.value();
+        }
+        return filedName.substring(0, filedName.length() - length);
     }
 
     protected void classToQueryWrapper(QueryWrapper<T> queryWrapper, Class c, T entity) {
@@ -128,7 +143,10 @@ public abstract class ServiceImpl<T, Q extends T, M extends Mapper<T>> implement
                 if (null != value) {
                     String fieldName = field.getName();
                     TableField tableField = field.getAnnotation(TableField.class);
-                    String column = null == tableField ? fieldName : tableField.value();
+                    String column = fieldName;
+                    if (tableField != null && !"".equals(tableField.value())) {
+                        column = tableField.value();
+                    }
                     queryWrapper.eq(column, value);
                 }
             } catch (IllegalAccessException e) {

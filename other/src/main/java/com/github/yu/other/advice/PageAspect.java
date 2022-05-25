@@ -19,14 +19,14 @@ import java.util.List;
 @Aspect
 @Component
 public class PageAspect {
-    @Pointcut("execution(* com.github.yu.*.service.impl.*.page*(..)) || execution(* com.github.yu.*.service.impl.BaseServiceImpl.page*(..))")
+    @Pointcut("execution(* com.github.yu.*.*.service.impl.*.page*(..)) || execution(* com.github.yu.*.service.impl.BaseServiceImpl.page*(..))")
     public void pointcut(){}
 
     @Around("pointcut()")
     public Object page(ProceedingJoinPoint joinPoint) throws Throwable {
         List<Integer> param = null;
-        if (getRequest().getMethod().equals("GET")) {
-            param = getParamFromHeader();
+        if ("GET".equals(getRequest().getMethod())) {
+            param = getParamFromUrl();
         } else {
             param = getParamFromBody(joinPoint.getArgs()[0]);
         }
@@ -44,7 +44,7 @@ public class PageAspect {
         return ((ServletRequestAttributes) attribute).getRequest();
     }
 
-    public List<Integer> getParamFromHeader() {
+    public List<Integer> getParamFromUrl() {
         HttpServletRequest request = getRequest();
         String startPage = request.getParameter("startPage");
         String pageSize = request.getParameter("pageSize");
