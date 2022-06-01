@@ -1,12 +1,13 @@
 package com.github.yu.base.service;
 
 
+import java.io.Serializable;
 import java.util.List;
 
 public interface BaseService<T, Q> {
     void insert(T t);
     
-    void deleteById(T t);
+    void deleteById(Serializable id);
 
     void deleteByName(String name);
 

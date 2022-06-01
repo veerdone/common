@@ -10,7 +10,6 @@ import org.apache.ibatis.plugin.Invocation;
 import org.apache.ibatis.plugin.Signature;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Component;
 
 import java.lang.reflect.Field;
 import java.time.LocalDate;
@@ -21,7 +20,6 @@ import java.time.LocalTime;
  * @author yu
  */
 @Intercepts({@Signature(method = "update", type = Executor.class, args = {MappedStatement.class, Object.class})})
-@Component
 public class DateInterceptor implements Interceptor {
     private static final Logger LOGGER = LoggerFactory.getLogger(DateInterceptor.class);
 

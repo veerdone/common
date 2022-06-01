@@ -1,18 +1,12 @@
 package com.github.yu.other.concurrent;
 
-import org.springframework.beans.BeansException;
-import org.springframework.beans.factory.config.BeanPostProcessor;
+
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.stereotype.Component;
 
-import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.LinkedBlockingQueue;
-import java.util.concurrent.ThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
+import java.util.concurrent.*;
 
-@Component
-@ConfigurationProperties(prefix = "config.executor")
-public class AsyncExecutor implements BeanPostProcessor {
+@ConfigurationProperties(prefix = "config.async.executor")
+public class AsyncExecutor {
     private Integer corePoolSize = 50;
     private Integer maximumPoolSize = 100;
     private Integer keepAliveTime = 30;
@@ -21,17 +15,18 @@ public class AsyncExecutor implements BeanPostProcessor {
     private ThreadPoolExecutor executor;
 
     public void execute(Runnable runnable) {
+        if (this.executor == null) {
+            createExecutor();
+        }
         this.executor.execute(runnable);
     }
 
-    @Override
-    public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
-        if (bean instanceof AsyncExecutor) {
-            ((AsyncExecutor) bean).executor = new ThreadPoolExecutor(corePoolSize, maximumPoolSize, keepAliveTime, timeUnit, blockingQueue);
-        }
-        return bean;
+    private void createExecutor() {
+        ThreadFactory factory = new TaskThreadFactory();
+        this.executor = new ThreadPoolExecutor(corePoolSize, maximumPoolSize, keepAliveTime, timeUnit, blockingQueue, factory);
     }
 
+    public AsyncExecutor() { }
 
     public Integer getCorePoolSize() {
         return corePoolSize;

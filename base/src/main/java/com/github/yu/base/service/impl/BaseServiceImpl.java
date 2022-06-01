@@ -4,6 +4,7 @@ import com.github.yu.base.mapper.BaseMapper;
 import com.github.yu.base.service.BaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.io.Serializable;
 import java.util.List;
 
 public abstract class BaseServiceImpl<T, Q, M extends BaseMapper<T, Q>>
@@ -17,8 +18,8 @@ public abstract class BaseServiceImpl<T, Q, M extends BaseMapper<T, Q>>
     }
 
     @Override
-    public void deleteById(T t) {
-        this.m.deleteById(t);
+    public void deleteById(Serializable id) {
+        this.m.deleteById(id);
     }
 
     @Override

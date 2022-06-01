@@ -2,6 +2,7 @@ package com.github.yu.base.controller;
 
 import com.github.yu.base.service.BaseService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -12,13 +13,18 @@ public abstract class BaseController<T, Q, S extends BaseService<T, Q>> {
     protected S service;
 
     @PostMapping("/insert")
-    public void insert(@RequestBody T t) {
+    public void insert(@RequestBody @Validated T t) {
         this.service.insert(t);
     }
 
-    @DeleteMapping("/deleteById")
-    public void deleteById(@RequestBody T t) {
-        this.service.deleteById(t);
+    @DeleteMapping("/deleteById/{id}")
+    public void deleteById(@PathVariable Long id) {
+        this.service.deleteById(id);
+    }
+
+    @DeleteMapping("/deleteByName")
+    public void deleteByName(@RequestParam String name) {
+        this.service.deleteByName(name);
     }
 
     @PutMapping("/updateById")

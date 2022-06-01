@@ -6,9 +6,12 @@ import com.github.yu.other.util.JwtUtil;
 import com.github.yu.result.advice.ExceptionAdvice;
 import com.github.yu.result.advice.ResponseAdvice;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Import;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 
 /**
@@ -17,24 +20,14 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
  */
 @AutoConfiguration
 @ConditionalOnProperty(prefix = "config.auto", name = "common", havingValue = "true", matchIfMissing = true)
+@Import({ResponseAdvice.class})
+@EnableConfigurationProperties(AsyncExecutor.class)
 public class CommonAutoConfigure {
-
-    @Bean
-    @ConditionalOnMissingBean(ResponseBodyAdvice.class)
-    public ResponseBodyAdvice<Object> responseBodyAdvice() {
-        return new ResponseAdvice();
-    }
 
     @Bean
     @ConditionalOnMissingBean(ExceptionAdvice.class)
     public ExceptionAdvice exceptionAdvice() {
         return new ExceptionAdvice();
-    }
-
-    @Bean
-    @ConditionalOnMissingBean(AsyncExecutor.class)
-    public AsyncExecutor asyncExecutor() {
-        return new AsyncExecutor();
     }
 
     @Bean

@@ -1,5 +1,9 @@
 package com.github.yu.other.exception;
 
+/**
+ * @author yu
+ * 异常枚举类
+ */
 public enum ExceptionEnum {
     USER_NOT_FOUND(400, "用户不存在"),
     ACCOUNT_EXIST(400, "账号已存在"),
@@ -10,6 +14,7 @@ public enum ExceptionEnum {
     USERNAME_EXIST(400, "用户名已存在"),
     FILE_SUFFIX_ERROR(400, "文件格式不合法"),
     NO_PERMISSION(401, "没有权限"),
+    EMAIL_EXIST(400, "邮箱已存在"),
     PASSWORD_ERROR_EXCEPTION(400, "密码错误");
 
     ExceptionEnum(int status, String message) {

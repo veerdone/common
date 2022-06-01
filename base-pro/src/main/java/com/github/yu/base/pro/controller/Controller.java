@@ -2,6 +2,7 @@ package com.github.yu.base.pro.controller;
 
 import com.github.yu.base.pro.service.Service;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -11,7 +12,7 @@ public abstract class Controller<T, Q extends T, S extends Service<T, Q>> {
     protected S service;
 
     @PostMapping("/insert")
-    public void insert(@RequestBody T t) {
+    public void insert(@RequestBody @Validated T t) {
         this.service.insert(t);
     }
 

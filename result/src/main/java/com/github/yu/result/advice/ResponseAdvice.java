@@ -21,27 +21,22 @@ import java.util.List;
  */
 @RestControllerAdvice
 public class ResponseAdvice implements ResponseBodyAdvice<Object> {
+
     @Override
     public boolean supports(MethodParameter methodParameter, Class<? extends HttpMessageConverter<?>> aClass) {
-        if (null != methodParameter.getMethodAnnotation(ExceptionHandler.class)) {
-            return false;
-        }
-        return true;
+        return null == methodParameter.getMethodAnnotation(ExceptionHandler.class);
     }
 
     @Override
     public Object beforeBodyWrite(Object o, MethodParameter methodParameter, MediaType mediaType, Class<? extends HttpMessageConverter<?>> aClass, ServerHttpRequest serverHttpRequest, ServerHttpResponse serverHttpResponse) {
-        if (null != o) {
-            if (o instanceof List) {
-                PageInfo pageInfo = new PageInfo();
-                long total = pageInfo.getTotal();
-                return ListResult.result((List)o, total);
-            } else if (o instanceof BaseResult) {
-                return o;
-            } else {
-                return ObjectResult.result(o);
-            }
+        if (o instanceof List) {
+            PageInfo pageInfo = new PageInfo();
+            long total = pageInfo.getTotal();
+            return ListResult.result((List)o, total);
+        } else if (o instanceof BaseResult) {
+            return o;
+        } else {
+            return ObjectResult.result(o);
         }
-        return o;
     }
 }

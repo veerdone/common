@@ -22,4 +22,21 @@ public class ListResult extends BaseResult{
     public static ListResult result(List list, Long total) {
         return new ListResult(200, "请求成功", list, total);
     }
+
+
+    public List getList() {
+        return list;
+    }
+
+    public void setList(List list) {
+        this.list = list;
+    }
+
+    public Long getTotal() {
+        return total;
+    }
+
+    public void setTotal(Long total) {
+        this.total = total;
+    }
 }
