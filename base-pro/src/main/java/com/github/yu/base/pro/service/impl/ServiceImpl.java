@@ -1,11 +1,12 @@
-package com.github.yu.base.pro.service;
+package com.github.yu.base.pro.service.impl;
 
+import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.github.yu.base.pro.mapper.Mapper;
+import com.github.yu.base.pro.service.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.io.Serializable;
 import java.lang.reflect.Field;
 import java.util.Arrays;
 import java.util.List;
@@ -21,7 +22,7 @@ public abstract class ServiceImpl<T, Q extends T, M extends Mapper<T>> implement
     }
 
     @Override
-    public void deleteById(Serializable id) {
+    public void deleteById(Long id) {
         this.mapper.deleteById(id);
     }
 
@@ -31,7 +32,7 @@ public abstract class ServiceImpl<T, Q extends T, M extends Mapper<T>> implement
     }
 
     @Override
-    public T getById(Serializable id) {
+    public T getById(Long id) {
         return this.mapper.selectById(id);
     }
 
@@ -92,11 +93,14 @@ public abstract class ServiceImpl<T, Q extends T, M extends Mapper<T>> implement
             Object value = null;
             field.setAccessible(true);
             try {
+                String fieldName = field.getName();
+                TableField tableField = field.getAnnotation(TableField.class);
+                if ((tableField != null && !tableField.exist()) || "serialVersionUID".equals(fieldName)) {
+                    continue;
+                }
                 value = field.get(query);
                 if (null != value) {
-                    String fieldName = field.getName();
                     String column;
-                    TableField tableField = field.getAnnotation(TableField.class);
                     if (fieldName.endsWith("GT")) {
                         column = getColumn(tableField, fieldName, 2);
                         queryWrapper.gt(column, value);
@@ -129,7 +133,7 @@ public abstract class ServiceImpl<T, Q extends T, M extends Mapper<T>> implement
         if (tableField != null && !"".equals(tableField.value())) {
             return tableField.value();
         }
-        return filedName.substring(0, filedName.length() - length);
+        return StrUtil.toUnderlineCase(filedName.substring(0, filedName.length() - length));
     }
 
     protected void classToQueryWrapper(QueryWrapper<T> queryWrapper, Class c, T entity) {
@@ -139,11 +143,14 @@ public abstract class ServiceImpl<T, Q extends T, M extends Mapper<T>> implement
             Object value = null;
             field.setAccessible(true);
             try {
+                String fieldName = field.getName();
+                TableField tableField = field.getAnnotation(TableField.class);
+                if ((tableField != null && !tableField.exist()) || "serialVersionUID".equals(fieldName)) {
+                    return;
+                }
                 value = field.get(entity);
                 if (null != value) {
-                    String fieldName = field.getName();
-                    TableField tableField = field.getAnnotation(TableField.class);
-                    String column = fieldName;
+                    String column = StrUtil.toUnderlineCase(fieldName);
                     if (tableField != null && !"".equals(tableField.value())) {
                         column = tableField.value();
                     }

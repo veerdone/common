@@ -1,16 +1,15 @@
 package com.github.yu.base.pro.service;
 
-import java.io.Serializable;
 import java.util.List;
 
 public interface Service<T, Q extends T> {
     void insert(T t);
 
-    void deleteById(Serializable id);
+    void deleteById(Long id);
 
     void updateById(T t);
 
-    T getById(Serializable id);
+    T getById(Long id);
 
     T getByEntity(T t);
 

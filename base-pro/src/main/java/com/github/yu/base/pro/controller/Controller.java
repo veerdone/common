@@ -17,7 +17,7 @@ public abstract class Controller<T, Q extends T, S extends Service<T, Q>> {
     }
 
     @DeleteMapping("/deleteById/{id}")
-    public void deleteById(@PathVariable String id) {
+    public void deleteById(@PathVariable Long id) {
         this.service.deleteById(id);
     }
 
@@ -27,7 +27,7 @@ public abstract class Controller<T, Q extends T, S extends Service<T, Q>> {
     }
 
     @GetMapping("/getById/{id}")
-    public T getById(@PathVariable String id) {
+    public T getById(@PathVariable Long id) {
         return this.service.getById(id);
     }
 

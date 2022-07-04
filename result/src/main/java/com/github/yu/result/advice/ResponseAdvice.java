@@ -30,9 +30,10 @@ public class ResponseAdvice implements ResponseBodyAdvice<Object> {
     @Override
     public Object beforeBodyWrite(Object o, MethodParameter methodParameter, MediaType mediaType, Class<? extends HttpMessageConverter<?>> aClass, ServerHttpRequest serverHttpRequest, ServerHttpResponse serverHttpResponse) {
         if (o instanceof List) {
-            PageInfo pageInfo = new PageInfo();
+            List list = (List) o;
+            PageInfo pageInfo = new PageInfo(list);
             long total = pageInfo.getTotal();
-            return ListResult.result((List)o, total);
+            return ListResult.result(list, total);
         } else if (o instanceof BaseResult) {
             return o;
         } else {

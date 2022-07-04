@@ -16,10 +16,13 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author yu
+ */
 @Aspect
 @Component
 public class PageAspect {
-    @Pointcut("execution(* com.github.yu.*.*.service.impl.*.page*(..)) || execution(* com.github.yu.*.service.impl.BaseServiceImpl.page*(..))")
+    @Pointcut("execution(* com.github.yu.*.*.service.impl.*.page*(..))")
     public void pointcut(){}
 
     @Around("pointcut()")
@@ -62,7 +65,7 @@ public class PageAspect {
         Field startPage = null;
         int i1 = 0, i2 = 0;
         try {
-            startPage = c.getDeclaredField("startPage");
+            startPage = c.getDeclaredField("current");
             startPage.setAccessible(true);
             i1 = startPage.getInt(o);
 
