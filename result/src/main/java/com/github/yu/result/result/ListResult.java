@@ -1,5 +1,8 @@
 package com.github.yu.result.result;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.github.yu.result.LongSerializer;
+
 import java.util.List;
 
 /**
@@ -8,6 +11,8 @@ import java.util.List;
  */
 public class ListResult extends BaseResult{
     private List list;
+
+    @JsonSerialize(using = LongSerializer.class)
     private Long total;
 
     public ListResult() {
